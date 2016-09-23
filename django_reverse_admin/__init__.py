@@ -52,7 +52,7 @@ def reverse_inlineformset_factory(parent_model,
                           (f.one_to_many or f.one_to_one) and
                           f.auto_created and not f.concrete]
         fields = [f.name for f in model._meta.get_fields() if f not in
-                  related_fields]  # ignoring reverse relations
+                  related_fields if f.editable]  # ignoring reverse relations
     kwargs = {
         'form': form,
         'formfield_callback': formfield_callback,
